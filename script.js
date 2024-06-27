@@ -40,6 +40,7 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+     
     if (humanChoice === "Rock" && computerChoice === "Paper") {
         currentScoreElement.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
         computerScore++;
@@ -73,10 +74,24 @@ function playRound(humanChoice, computerChoice) {
     else if (humanChoice === "Scissors" && computerChoice === "Scissors") {
         currentScoreElement.textContent= `You tie! ${computerChoice} ties with ${humanChoice}`;
     }
-
-    console.log(`Human: ${humanScore} Computer: ${computerScore}`);
+    updateScore();
+    if (humanScore >= 5 || computerScore >=5) {
+        resetGame();
+    }
 }
 
+function resetGame() {
+    if (humanScore > computerScore) {
+        currentScoreElement.textContent = "You win the series!";
+    }
+    else {
+        currentScoreElement.textContent = "You lose the series!";
+    }
+    humanScore = 0;
+    computerScore = 0;
+    updateScore();
+
+}
 
 // function playGame() {
 //     for (i =0; i <5; i++) {
@@ -98,6 +113,9 @@ function playRound(humanChoice, computerChoice) {
 
 //playGame();
 
+function updateScore() {
+    totalScoreElement.textContent = `You: ${humanScore} Computer: ${computerScore}`;
+}
 
 console.log(rockElement);
 rockElement.addEventListener("click", () => {
